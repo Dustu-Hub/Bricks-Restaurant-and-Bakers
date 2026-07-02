@@ -1,0 +1,6 @@
+{
+  "name": "Bricks Restaurant and Bakers",
+  "description": "Premium restaurant, rooftop dining, eggless bakery, and café with 3 branches in Jodhpur.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
