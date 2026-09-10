@@ -54,3 +54,23 @@ export interface BookingData {
   phone: string;
   email: string;
 }
+
+export interface TableReservation extends BookingData {
+  id: string;
+  createdAt: string;
+  status: 'confirmed' | 'delayed' | 'cancelled' | 'completed';
+  completedAt?: string;
+  delayMinutes?: number;
+  originalTime?: string;
+  userEmail?: string;
+  delayReason?: string;
+}
+
+export interface RegisteredUser {
+  name: string;
+  email: string;
+  phone: string;
+  password: string;
+  preferredLocation: string;
+  createdAt: string;
+}

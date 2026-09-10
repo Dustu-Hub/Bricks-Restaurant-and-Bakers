@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, CalendarCheck, LogIn, LogOut, User } from 'lucide-react';
+import { Menu, X, CalendarCheck, LogIn, LogOut, User, Clock } from 'lucide-react';
 
 interface NavbarProps {
   currentPath: string;
@@ -149,18 +149,28 @@ export default function Navbar({ currentPath, onNavigate, user, onLogout }: Navb
           </div>
 
           {/* Desktop CTAs */}
-          <div id="desktop-ctas" className="hidden lg:flex items-center space-x-4">
+          <div id="desktop-ctas" className="hidden lg:flex items-center space-x-3">
             {user ? (
-              <div className="flex items-center space-x-3 bg-brand-secondary-bg/40 py-1.5 px-3 rounded-full border border-brand-secondary-bg/70 text-sm">
-                <User size={16} className="text-brand-terracotta" />
-                <span className="font-medium text-brand-charcoal">{user.name.split(' ')[0]}</span>
+              <div className="flex items-center space-x-2">
                 <button
-                  onClick={onLogout}
-                  title="Logout"
-                  className="text-brand-gray hover:text-brand-terracotta transition-colors ml-1"
+                  onClick={() => handleLinkClick('booking')}
+                  className="text-xs font-bold bg-brand-forest hover:bg-brand-forest/90 text-[#FDF9F3] px-3.5 py-2 rounded-xl transition-all shadow-sm flex items-center space-x-1.5 cursor-pointer"
+                  title="View and manage recent table reservations"
                 >
-                  <LogOut size={16} />
+                  <Clock size={14} className="text-brand-yellow" />
+                  <span>My Bookings</span>
                 </button>
+                <div className="flex items-center space-x-2 bg-brand-secondary-bg/50 py-1.5 px-3 rounded-xl border border-brand-secondary-bg text-xs">
+                  <User size={15} className="text-brand-terracotta" />
+                  <span className="font-semibold text-brand-charcoal">{user.name.split(' ')[0]}</span>
+                  <button
+                    onClick={onLogout}
+                    title="Logout"
+                    className="text-brand-gray hover:text-brand-terracotta transition-colors ml-1 cursor-pointer"
+                  >
+                    <LogOut size={15} />
+                  </button>
+                </div>
               </div>
             ) : (
               <button
@@ -221,20 +231,29 @@ export default function Navbar({ currentPath, onNavigate, user, onLogout }: Navb
 
             <div className="border-t border-brand-secondary-bg/50 my-2 pt-4 flex flex-col space-y-3">
               {user ? (
-                <div className="flex items-center justify-between py-2 px-3 rounded-xl bg-brand-secondary-bg/30">
-                  <div className="flex items-center space-x-2">
-                    <User size={18} className="text-brand-terracotta" />
-                    <span className="font-semibold text-sm text-brand-charcoal">{user.name}</span>
+                <div className="flex flex-col space-y-2">
+                  <div className="flex items-center justify-between py-2 px-3 rounded-xl bg-brand-secondary-bg/30">
+                    <div className="flex items-center space-x-2">
+                      <User size={18} className="text-brand-terracotta" />
+                      <span className="font-semibold text-sm text-brand-charcoal">{user.name}</span>
+                    </div>
+                    <button
+                      onClick={() => {
+                        onLogout();
+                        setIsMobileMenuOpen(false);
+                      }}
+                      className="text-brand-terracotta flex items-center space-x-1 text-xs font-semibold cursor-pointer"
+                    >
+                      <LogOut size={14} />
+                      <span>Logout</span>
+                    </button>
                   </div>
                   <button
-                    onClick={() => {
-                      onLogout();
-                      setIsMobileMenuOpen(false);
-                    }}
-                    className="text-brand-terracotta flex items-center space-x-1 text-xs font-semibold"
+                    onClick={() => handleLinkClick('booking')}
+                    className="flex items-center justify-center space-x-2 w-full py-2.5 px-4 rounded-xl text-xs font-bold text-white bg-brand-forest hover:bg-brand-forest/90 cursor-pointer shadow-sm"
                   >
-                    <LogOut size={14} />
-                    <span>Logout</span>
+                    <Clock size={15} className="text-brand-yellow" />
+                    <span>My Bookings</span>
                   </button>
                 </div>
               ) : (
